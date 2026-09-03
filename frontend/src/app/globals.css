@@ -1,0 +1,341 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --ipl-gold:   #f5a623;
+  --ipl-orange: #ff6b00;
+  --ipl-red:    #e63946;
+  --ipl-blue:   #1a1a2e;
+  --ipl-navy:   #16213e;
+  --ipl-dark:   #0f0f1a;
+  --ipl-glass:  rgba(255,255,255,0.05);
+  --ipl-border: rgba(255,255,255,0.08);
+  --grad-fire:  linear-gradient(135deg, #ff6b00, #f5a623);
+  --grad-cool:  linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--ipl-dark);
+  color: #f0f0f0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--ipl-dark); }
+::-webkit-scrollbar-thumb { background: var(--ipl-orange); border-radius: 3px; }
+
+/* ── Typography ────────────────────────────────────────────── */
+.font-bebas   { font-family: 'Bebas Neue', cursive; }
+.font-rajdhani{ font-family: 'Rajdhani', sans-serif; }
+
+/* ── Glassmorphism ─────────────────────────────────────────── */
+.glass {
+  background: var(--ipl-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--ipl-border);
+  border-radius: 16px;
+}
+
+.glass-strong {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+}
+
+/* ── Fire gradient text ────────────────────────────────────── */
+.text-fire {
+  background: var(--grad-fire);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glow effects ──────────────────────────────────────────── */
+.glow-orange { box-shadow: 0 0 30px rgba(255,107,0,0.3), 0 0 60px rgba(255,107,0,0.1); }
+.glow-gold   { box-shadow: 0 0 30px rgba(245,166,35,0.3), 0 0 60px rgba(245,166,35,0.1); }
+.glow-text   { text-shadow: 0 0 20px rgba(255,107,0,0.8); }
+
+/* ── Animated gradient border ──────────────────────────────── */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #ff6b00, #f5a623, #ff6b00);
+  background-size: 200% 200%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderRotate 3s linear infinite;
+}
+@keyframes borderRotate {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Animated background particles ────────────────────────── */
+.particles-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* ── Card hover lift ───────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+              box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 24px 64px rgba(255,107,0,0.2);
+}
+
+/* ── Button styles ─────────────────────────────────────────── */
+.btn-fire {
+  background: var(--grad-fire);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(255,107,0,0.3);
+}
+.btn-fire:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255,107,0,0.5);
+  filter: brightness(1.1);
+}
+.btn-fire:active { transform: translateY(0); }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-ghost:hover {
+  border-color: var(--ipl-orange);
+  background: rgba(255,107,0,0.1);
+  color: var(--ipl-orange);
+}
+
+/* ── Input style ───────────────────────────────────────────── */
+.ipl-input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  outline: none;
+  width: 100%;
+  padding: 0.75rem 1rem;
+}
+.ipl-input:focus {
+  border-color: var(--ipl-orange);
+  background: rgba(255,107,0,0.05);
+  box-shadow: 0 0 0 3px rgba(255,107,0,0.15);
+}
+.ipl-input option { background: #1a1a2e; }
+
+/* ── Section title ─────────────────────────────────────────── */
+.section-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+}
+
+/* ── Stat card ─────────────────────────────────────────────── */
+.stat-card {
+  background: var(--ipl-glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--ipl-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+.stat-card:hover {
+  border-color: rgba(255,107,0,0.3);
+  background: rgba(255,107,0,0.05);
+}
+
+/* ── Progress bar ──────────────────────────────────────────── */
+.progress-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.1);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--grad-fire);
+  transition: width 1s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* ── Win probability gauge ─────────────────────────────────── */
+.gauge-ring {
+  filter: drop-shadow(0 0 12px rgba(255,107,0,0.6));
+}
+
+/* ── Team pill ─────────────────────────────────────────────── */
+.team-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+}
+
+/* ── Shimmer loader ────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* ── Pulse animation ───────────────────────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255,107,0,0.3); }
+  50%       { box-shadow: 0 0 40px rgba(255,107,0,0.7); }
+}
+.pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+/* ── Float animation ───────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+.float { animation: float 3s ease-in-out infinite; }
+
+/* ── Slide in animations ───────────────────────────────────── */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.anim-slide-left { animation: slideInLeft 0.6s cubic-bezier(0.34,1.56,0.64,1) both; }
+.anim-slide-up   { animation: slideInUp  0.6s cubic-bezier(0.34,1.56,0.64,1) both; }
+.anim-fade-in    { animation: fadeIn 0.5s ease both; }
+
+/* ── Nav ───────────────────────────────────────────────────── */
+.nav-link {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--grad-fire);
+  border-radius: 1px;
+  transition: width 0.3s ease;
+}
+.nav-link:hover { color: #fff; }
+.nav-link:hover::after,
+.nav-link.active::after { width: 70%; }
+.nav-link.active { color: var(--ipl-orange); }
+
+/* ── Three.js canvas wrapper ───────────────────────────────── */
+.three-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* ── Table ─────────────────────────────────────────────────── */
+.ipl-table { width: 100%; border-collapse: collapse; }
+.ipl-table th {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ipl-orange);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ipl-border);
+  text-align: left;
+}
+.ipl-table td {
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.2s;
+}
+.ipl-table tr:hover td { background: rgba(255,107,0,0.05); }
+.ipl-table tr:first-child td { border-top: none; }
+
+/* ── Badge ─────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: 'Rajdhani', sans-serif;
+}
+.badge-gold   { background: rgba(245,166,35,0.15); color: var(--ipl-gold); border: 1px solid rgba(245,166,35,0.3); }
+.badge-orange { background: rgba(255,107,0,0.15); color: var(--ipl-orange); border: 1px solid rgba(255,107,0,0.3); }
+.badge-blue   { background: rgba(99,179,237,0.15); color: #63b3ed; border: 1px solid rgba(99,179,237,0.3); }
+.badge-green  { background: rgba(72,187,120,0.15); color: #48bb78; border: 1px solid rgba(72,187,120,0.3); }
+.badge-red    { background: rgba(230,57,70,0.15); color: var(--ipl-red); border: 1px solid rgba(230,57,70,0.3); }

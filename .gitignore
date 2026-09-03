@@ -1,0 +1,23 @@
+# Dependencies and build output
+frontend/node_modules/
+frontend/.next/
+
+# Python caches and local environment files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.local
+
+# Large, reproducible training inputs and backups
+deliveries.csv
+matches.csv
+merged_all.parquet
+inn2_tracking.parquet
+data_backup/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
