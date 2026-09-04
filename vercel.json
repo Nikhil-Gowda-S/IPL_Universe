@@ -7,8 +7,7 @@
     },
     "backend": {
       "root": ".",
-      "entrypoint": "api/index.py",
-      "includeFiles": "frontend/public/data/*.json"
+      "entrypoint": "api/index.py"
     }
   },
   "rewrites": [
