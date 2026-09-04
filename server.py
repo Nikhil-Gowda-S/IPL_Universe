@@ -14,7 +14,6 @@ from typing import Optional
 
 import joblib
 import numpy as np
-import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, validator
@@ -167,7 +166,7 @@ def predict(req: PredictRequest):
 
     # Encode categoricals
     bat_enc   = safe_encode(le_team,  req.batting_team,  "batting_team")
-    bowl_enc  = safe_encode(le_team,  req.bowling_team,  "bowling_team")
+    bowl_enc  = safe_encode(le_team,  req.bowling_team, "bowling_team")
     venue_enc = safe_encode(le_venue, req.venue,         "venue")
 
     X = np.array([[bat_enc, bowl_enc, venue_enc,
@@ -193,4 +192,5 @@ def predict(req: PredictRequest):
 # ENTRY POINT
 # ─────────────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
+    import uvicorn
     uvicorn.run("server:app", host="0.0.0.0", port=8000, reload=True)
