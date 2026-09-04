@@ -15,6 +15,15 @@
       ]
     }
   },
+  "functions": {
+    "api/index.py": {
+      "includeFiles": [
+        "frontend/public/data/stats_batters.json",
+        "frontend/public/data/stats_bowlers.json",
+        "frontend/public/data/stats_h2h.json"
+      ]
+    }
+  },
   "rewrites": [
     {
       "source": "/api/:path*",
