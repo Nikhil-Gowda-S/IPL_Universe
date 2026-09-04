@@ -1,7 +1,5 @@
 fastapi
-uvicorn
 joblib
 numpy
 scikit-learn
-xgboost
-pydantic
+xgboost-cpu==3.4.1
