@@ -1,31 +1,154 @@
-# IPL Universe
+# 🏏 IPL Universe
 
-An interactive IPL analytics platform that combines all-time player data, batter-vs-bowler matchups, venue intelligence, an ML win predictor, and immersive Three.js visualizations.
+### **The IPL, turned into an interactive data playground.**
 
-![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js) ![React](https://img.shields.io/badge/React-19-149eca?logo=react) ![Three.js](https://img.shields.io/badge/Three.js-3D-000000?logo=three.js) ![Python](https://img.shields.io/badge/Python-FastAPI-3776ab?logo=python)
+> **What if you could explore IPL history, inspect player matchups, understand venues, and ask an ML model who is more likely to win — all from one place?**
+>
+> **You can.**
 
-## Highlights
+## 🚀 Try IPL Universe
 
-- Explore IPL career statistics for the complete batting and bowling datasets.
-- Fuzzy player search supports initial and full-name variants such as `A Raghuvanshi` and `Angkrish Raghuvanshi`.
-- Compare batter-vs-bowler records with a graceful career-stat fallback for players who never faced each other.
-- Inspect procedural 3D shot trajectories, boundary arcs, wicket impacts, and bowling-length zones.
-- Experience an interactive golden IPL trophy and stadium scene with orbit controls, themed lighting, glowing wickets, and particles.
-- Review venue scoring profiles, toss trends, hover tilt, and 360-degree stadium cards.
-- Estimate second-innings win probability through a FastAPI-served ML model.
+### 👉 **[LIVE DEMO — Open IPL Universe](https://ipl-universe.vercel.app/)**
 
-## Tech stack
+Explore it in your browser — no setup required.
 
-| Area | Technology |
-| --- | --- |
-| Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS |
-| 3D graphics | Three.js, OrbitControls, procedural geometries |
-| Backend | FastAPI, Pydantic, Uvicorn |
-| ML/data | scikit-learn/XGBoost model artifact, Pandas, NumPy |
+---
 
-## Run locally
+## 🔥 What can you do?
 
-### Frontend
+### 🤖 Predict the winner
+
+Enter a live second-innings match situation — target, current score, overs and wickets — and the trained **XGBoost model** estimates the batting team's win probability.
+
+**Example:**
+
+```text
+India vs Australia
+Target: 190
+Score: 142/4
+Overs: 16.2
+
+→ Win probability: ML prediction
+```
+
+The predictor derives match-state features such as runs required, balls remaining, wickets in hand, current run rate and required run rate before sending them to the model.
+
+### 🧑‍💻 Explore IPL players
+
+Search players by full name, partial name or initials and explore career batting and bowling statistics.
+
+### ⚔️ Batter vs Bowler
+
+Pick a batter and bowler to see their head-to-head record. When an exact matchup isn't available, IPL Universe intelligently falls back to career-level comparison data instead of leaving you with an empty screen.
+
+### 🏟️ Discover venue intelligence
+
+Explore IPL venues through scoring patterns, toss trends and interactive stadium cards.
+
+### 🥇 Experience the 3D IPL world
+
+This isn't just another statistics dashboard.
+
+IPL Universe uses **Three.js** to create an interactive cricket environment featuring:
+
+- 🏆 3D IPL trophy
+- 🏟️ Interactive stadium scene
+- 🏏 Procedural batting-shot trajectories
+- 💥 Boundary arcs and impact effects
+- 🎯 Bowling-length zones
+- ✨ Glowing wickets, particles and themed lighting
+- 🖱️ Orbit / 360° interactions
+
+---
+
+## 📸 The idea
+
+Most cricket analytics tools answer **one** question at a time.
+
+IPL Universe tries to make IPL data feel like an **experience** — combining statistics, machine learning and 3D visualization into one interactive platform.
+
+```text
+                 IPL UNIVERSE
+                       │
+       ┌───────────────┼───────────────┐
+       │               │               │
+   👤 Players      ⚔️ Matchups     🏟️ Venues
+       │               │               │
+       └───────────────┼───────────────┘
+                       │
+                 🤖 ML Predictor
+                       │
+                  🏏 3D World
+```
+
+---
+
+## 🧠 Machine Learning
+
+The win predictor uses a trained **XGBoost classification model** for second-innings match situations.
+
+### Features used
+
+- Batting team
+- Bowling team
+- Venue
+- Target score
+- Runs remaining
+- Balls remaining
+- Wickets remaining
+- Current run rate (CRR)
+- Required run rate (RRR)
+
+The model is served through a **FastAPI backend**, while the Next.js frontend provides the interactive interface.
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| 🎨 Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS |
+| 🎮 3D | Three.js, OrbitControls, procedural geometries |
+| ⚡ API | FastAPI, Pydantic |
+| 🤖 ML | XGBoost + scikit-learn |
+| 📊 Data | JSON datasets, Pandas, NumPy |
+| ☁️ Deployment | Vercel |
+
+---
+
+## 🗂️ Project Structure
+
+```text
+IPL_Universe/
+│
+├── frontend/                  # Next.js application
+│   ├── src/app/               # Home, players, predictor, venues, history
+│   ├── src/components/        # Reusable UI + Three.js components
+│   └── public/data/            # IPL analytics datasets
+│
+├── api/
+│   └── index.py               # Vercel → FastAPI entry point
+│
+├── server.py                  # FastAPI backend
+├── train_model.py             # ML model training
+├── build_pipeline.py          # Data preparation pipeline
+├── ipl_win_predictor.pkl      # Trained model artifact
+├── requirements.txt            # Backend dependencies
+└── vercel.json                 # Deployment configuration
+```
+
+---
+
+## 💻 Run it locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Nikhil-Gowda-S/IPL_Universe.git
+cd IPL_Universe
+```
+
+### 2. Start the frontend
 
 ```bash
 cd frontend
@@ -33,43 +156,67 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open **http://localhost:3000**.
 
-### Predictor API (optional)
+### 3. Start the API
 
-Use Python 3.10+ and install the backend dependencies used by `server.py`:
+From the project root:
 
 ```bash
-pip install fastapi uvicorn joblib numpy scikit-learn xgboost
+pip install -r requirements.txt
 python server.py
 ```
 
-The API starts at [http://localhost:8000](http://localhost:8000). It provides `/health`, `/predict`, `/players/search`, and `/players/h2h`.
+The API runs locally on **http://localhost:8000**.
 
-## Quality checks
+---
+
+## 🧪 Build check
 
 ```bash
 cd frontend
 npm run build
 ```
 
-## Repository layout
+---
 
-```text
-frontend/                 Next.js user interface and browser-ready stats
-  src/app/                Routes: home, players, predictor, venues, history
-  src/components/         Three.js scenes and reusable UI components
-  public/data/            Curated IPL analytics JSON datasets
-server.py                 FastAPI predictor and player-data endpoints
-train_model.py            Win-prediction model training script
-build_pipeline.py         Data preparation pipeline
-ipl_win_predictor.pkl     Trained model artifact
-```
+## 📈 Why this project?
 
-## Resume-ready project summary
+IPL Universe was built to explore what happens when **sports analytics + machine learning + modern web development + 3D graphics** are combined into a single product.
 
-> Built an IPL analytics platform with Next.js, TypeScript, FastAPI, and Three.js. Implemented fuzzy player search across 700+ records, H2H analytics with career-stat fallbacks, procedural 3D visualizations, venue trend interactions, and an ML-powered win predictor.
+It is designed not just to display numbers, but to make those numbers **interactive, visual and understandable**.
 
-## Data note
+---
 
-The repository ships compact aggregated JSON files required by the UI and the trained predictor artifact. Large, reproducible raw training datasets are intentionally excluded from version control.
+## 👨‍💻 Built by Nikhil Gowda S
+
+If you find the project interesting:
+
+- ⭐ **Star the repository**
+- 🍴 **Fork it and experiment**
+- 🐛 Open an issue with ideas or improvements
+- 🚀 Try the **[live demo](https://ipl-universe.vercel.app/)**
+
+### ⭐ If you like it, give the repo a star!
+
+---
+
+## 📌 Resume-ready summary
+
+> **IPL Universe** — Built an interactive IPL analytics platform using Next.js, TypeScript, FastAPI, Three.js and XGBoost, featuring player analytics, batter-vs-bowler H2H comparisons, venue intelligence, procedural 3D cricket visualizations, and an ML-powered second-innings win predictor.
+
+---
+
+## 📊 Data
+
+The repository contains compact aggregated datasets used by the application and the trained predictor artifact. Large raw training datasets are intentionally excluded from version control.
+
+---
+
+<div align="center">
+
+### 🏏 **Don't just look at IPL numbers. Explore the universe behind them.**
+
+**[🚀 OPEN IPL UNIVERSE](https://ipl-universe.vercel.app/)**
+
+</div>
