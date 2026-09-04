@@ -10,7 +10,7 @@
 
 ### 👉 **[LIVE DEMO — Open IPL Universe](https://ipl-universe.vercel.app/)**
 
-Explore it in your browser — no setup required.
+Explore the full experience in your browser — no setup required.
 
 ---
 
@@ -18,20 +18,20 @@ Explore it in your browser — no setup required.
 
 ### 🤖 Predict the winner
 
-Enter a live second-innings match situation — target, current score, overs and wickets — and the trained **XGBoost model** estimates the batting team's win probability.
+Put the model into a real IPL situation and see what it thinks.
 
-**Example:**
+**For example:**
 
 ```text
-India vs Australia
-Target: 190
-Score: 142/4
-Overs: 16.2
+CSK vs RCB
+Target: 196
+Score: 154/4
+Overs: 17.2
 
-→ Win probability: ML prediction
+→ CSK win probability: ML prediction
 ```
 
-The predictor derives match-state features such as runs required, balls remaining, wickets in hand, current run rate and required run rate before sending them to the model.
+The predictor uses the current match state — target, score, overs and wickets — and derives features such as **runs required, balls remaining, wickets in hand, current run rate and required run rate** before passing them to the trained XGBoost model.
 
 ### 🧑‍💻 Explore IPL players
 
@@ -39,9 +39,11 @@ Search players by full name, partial name or initials and explore career batting
 
 ### ⚔️ Batter vs Bowler
 
-Pick a batter and bowler to see their head-to-head record. When an exact matchup isn't available, IPL Universe intelligently falls back to career-level comparison data instead of leaving you with an empty screen.
+Ever wondered what happens when a batter faces a particular bowler?
 
-### 🏟️ Discover venue intelligence
+Pick a matchup such as **Virat Kohli vs Jasprit Bumrah** and explore their head-to-head record. When an exact matchup isn't available, IPL Universe falls back to career-level comparison data instead of leaving you with an empty result.
+
+### 🏟️ Discover IPL venues
 
 Explore IPL venues through scoring patterns, toss trends and interactive stadium cards.
 
@@ -49,7 +51,7 @@ Explore IPL venues through scoring patterns, toss trends and interactive stadium
 
 This isn't just another statistics dashboard.
 
-IPL Universe uses **Three.js** to create an interactive cricket environment featuring:
+IPL Universe uses **Three.js** to turn cricket data into an interactive visual experience featuring:
 
 - 🏆 3D IPL trophy
 - 🏟️ Interactive stadium scene
@@ -61,31 +63,33 @@ IPL Universe uses **Three.js** to create an interactive cricket environment feat
 
 ---
 
-## 📸 The idea
+## 🧠 The idea
 
 Most cricket analytics tools answer **one** question at a time.
 
-IPL Universe tries to make IPL data feel like an **experience** — combining statistics, machine learning and 3D visualization into one interactive platform.
+IPL Universe brings multiple sides of the IPL into one experience:
 
 ```text
-                 IPL UNIVERSE
-                       │
-       ┌───────────────┼───────────────┐
-       │               │               │
-   👤 Players      ⚔️ Matchups     🏟️ Venues
-       │               │               │
-       └───────────────┼───────────────┘
-                       │
-                 🤖 ML Predictor
-                       │
-                  🏏 3D World
+                 🏏 IPL UNIVERSE
+                        │
+        ┌───────────────┼───────────────┐
+        │               │               │
+    👤 Players      ⚔️ Matchups     🏟️ Venues
+        │               │               │
+        └───────────────┼───────────────┘
+                        │
+                  🤖 ML Predictor
+                        │
+                   🏏 3D World
 ```
+
+The goal isn't just to display numbers. It's to make IPL data **interactive, visual and fun to explore**.
 
 ---
 
-## 🧠 Machine Learning
+## 🤖 Machine Learning — Win Predictor
 
-The win predictor uses a trained **XGBoost classification model** for second-innings match situations.
+The predictor uses a trained **XGBoost classification model** to estimate the probability of the batting team winning a second-innings situation.
 
 ### Features used
 
@@ -180,11 +184,11 @@ npm run build
 
 ---
 
-## 📈 Why this project?
+## 💡 Why this project?
+
+IPL has an enormous amount of data — matches, players, venues, matchups and moments — but raw statistics don't always make that data exciting.
 
 IPL Universe was built to explore what happens when **sports analytics + machine learning + modern web development + 3D graphics** are combined into a single product.
-
-It is designed not just to display numbers, but to make those numbers **interactive, visual and understandable**.
 
 ---
 
