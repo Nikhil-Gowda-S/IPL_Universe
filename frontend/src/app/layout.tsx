@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ParticleBackground from "@/components/ParticleBackground";
+import ApiRedirect from "@/components/ApiRedirect";
 
 export const metadata: Metadata = {
   title: "IPL Universe — The Ultimate Cricket Analytics Platform",
@@ -27,6 +28,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body>
+        <ApiRedirect />
         <ParticleBackground />
         <Navbar />
         <main style={{ position: "relative", zIndex: 1 }}>{children}</main>
