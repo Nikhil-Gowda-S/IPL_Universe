@@ -1,9 +1,13 @@
 """Vercel entry point for the IPL Universe FastAPI backend."""
 
-# Vercel's Python runtime exposes api/index.py as the /api function.
-# The runtime strips the /api function prefix before handing the request
-# to the ASGI application, so the existing FastAPI routes can be exported
-# directly without mounting them under another /api prefix.
-from server import app
+from fastapi import FastAPI
+
+from server import app as backend_app
+
+# Vercel sends /api/* requests to this backend service. Mount the existing
+# FastAPI application at /api so its existing routes (/predict, /health,
+# /teams, /venues, /players/...) keep their current paths.
+app = FastAPI(title="IPL Universe API")
+app.mount("/api", backend_app)
 
 __all__ = ["app"]
