@@ -25,7 +25,8 @@ interface PredictResponse {
   bowling_team: string;
 }
 
-const API = "http://localhost:8000";
+// Use the Vercel API in production and the local FastAPI server during local development.
+const API = process.env.NEXT_PUBLIC_API_URL || "/api";
 
 export default function PredictorPage() {
   const [teams,  setTeams]  = useState<string[]>([]);
@@ -327,29 +328,23 @@ export default function PredictorPage() {
             ) : (
               <div className="glass" style={{ padding: "3rem", textAlign: "center", minHeight: 300, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                 <div style={{ fontSize: "4rem", marginBottom: "1rem" }}>🔮</div>
-                <div style={{ fontFamily: "'Bebas Neue', cursive", fontSize: "1.5rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.05em" }}>
+                <div style={{ fontFamily: "'Bebas Neue', cursive", fontSize: "1.8rem", color: "rgba(255,255,255,0.35)" }}>
                   AWAITING PREDICTION
                 </div>
-                <p style={{ color: "rgba(255,255,255,0.3)", marginTop: "0.75rem", fontSize: "0.9rem" }}>
+                <p style={{ color: "rgba(255,255,255,0.3)", marginTop: "0.75rem" }}>
                   Fill in the match state and click Predict
                 </p>
               </div>
             )}
 
-            {/* History */}
+            {/* Prediction history */}
             {history.length > 0 && (
               <div className="glass" style={{ padding: "1.5rem" }}>
-                <h3 style={{ fontFamily: "'Bebas Neue', cursive", fontSize: "1rem", marginBottom: "1rem", color: "rgba(255,255,255,0.4)", letterSpacing: "0.08em" }}>
-                  RECENT PREDICTIONS
-                </h3>
+                <h3 style={{ fontFamily: "'Bebas Neue', cursive", fontSize: "1.1rem", marginBottom: "1rem", color: "#f5a623" }}>RECENT PREDICTIONS</h3>
                 {history.map((h, i) => (
-                  <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.6rem 0", borderBottom: i < history.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none", fontSize: "0.83rem" }}>
-                    <span style={{ color: "rgba(255,255,255,0.6)" }}>
-                      {h.form.batting_team.split(" ").slice(-1)[0]} vs {h.form.bowling_team.split(" ").slice(-1)[0]}
-                    </span>
-                    <span style={{ color: h.result.win_probability > 0.5 ? "#48bb78" : "#e63946", fontWeight: 700 }}>
-                      {(h.result.win_probability * 100).toFixed(0)}%
-                    </span>
+                  <div key={i} style={{ display: "flex", justifyContent: "space-between", gap: "1rem", padding: ".65rem 0", borderBottom: i < history.length - 1 ? "1px solid rgba(255,255,255,.07)" : "none", fontSize: ".8rem" }}>
+                    <span>{h.form.batting_team} vs {h.form.bowling_team}</span>
+                    <b style={{ color: "#f5a623" }}>{(h.result.win_probability * 100).toFixed(1)}%</b>
                   </div>
                 ))}
               </div>
@@ -357,17 +352,6 @@ export default function PredictorPage() {
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .grid-2 { grid-template-columns: 1fr !important; }
-        }
-        select option { background: #1a1a2e; color: #fff; }
-        input:focus, select:focus {
-          border-color: #ff6b00 !important;
-          box-shadow: 0 0 0 3px rgba(255,107,0,0.15) !important;
-        }
-      `}</style>
     </div>
   );
 }
